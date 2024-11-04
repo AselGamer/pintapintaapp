@@ -1,14 +1,23 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
+	SafeAreaView,
+	StyleSheet,
+	Text,
 } from 'react-native';
 
 function App(): React.JSX.Element {
 
-  return (
-    <SafeAreaView></SafeAreaView>
-  );
+	console.log("hola");
+	return (
+		<>
+			<NavigationContainer>
+				<NativeBaseProvider>
+				</NativeBaseProvider>
+			</NavigationContainer>
+		</>
+	);
 }
 
 const styles = StyleSheet.create({
