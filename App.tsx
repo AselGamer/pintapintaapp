@@ -38,11 +38,13 @@ function App(): React.JSX.Element {
 			<GestureHandlerRootView>
 				<NativeBaseProvider>
 					<NavigationContainer>
-						<Drawer.Navigator initialRouteName='Login' >
+						<Drawer.Navigator initialRouteName='Login' screenOptions={{
+							swipeEnabled: true,
+						}}>
 							<Drawer.Screen name='Login' component={Login} options={{
 								headerLeftContainerStyle: { display: 'none' },
 								drawerItemStyle: { display: 'none' },
-								swipeEnabled: false
+								swipeEnabled: false,
 							}} />
 							<Drawer.Screen name='Inicio' component={Inicio} />
 						</Drawer.Navigator>

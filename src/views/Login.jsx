@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useFocusEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VStack, FormControl, Input, Button } from 'native-base';
-import { BackHandler } from 'react-native';
 
 
 const Login = ({ navigation }) => {
@@ -17,14 +16,14 @@ const Login = ({ navigation }) => {
 	}, []);
 
 	return (
-		<VStack width="90%" height="80%" mx="3" alignSelf='center' justifyContent='center' marginTop='3'>
+		<VStack width='90%' height='80%' mx='3' alignSelf='center' justifyContent='center' marginTop='3'>
 			<FormControl>
 				<FormControl.Label _text={{
 					bold: true
 				}}>
 					Correo
 				</FormControl.Label>
-				<Input placeholder="sergio@almi.eus" onChangeText={value => setData({
+				<Input placeholder='sergio@almi.eus' type='text' onChangeText={value => setData({
 					...formData,
 					name: value
 				})} />
@@ -50,7 +49,7 @@ const Login = ({ navigation }) => {
 					Error Contra
 				</FormControl.ErrorMessage>
 			</FormControl>
-			<Button mt="5" colorScheme="cyan" onPress={() => {navigation.navigate('Inicio')}}>
+			<Button mt='5' colorScheme='cyan' onPress={() => {navigation.navigate('Inicio')}}>
 				Iniciar Sesion
 			</Button>
 		</VStack>
