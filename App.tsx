@@ -21,6 +21,7 @@ const Drawer = createDrawerNavigator();
 
 function App(): React.JSX.Element {
 
+	// Para bloquear el boton de atras
 	useEffect(
 		React.useCallback(() => {
 			const subscription = BackHandler.addEventListener(
