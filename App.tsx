@@ -40,6 +40,7 @@ function App(): React.JSX.Element {
 					<NavigationContainer>
 						<Drawer.Navigator initialRouteName='Login' screenOptions={{
 							swipeEnabled: true,
+							swipeEdgeWidth: 100
 						}}>
 							<Drawer.Screen name='Login' component={Login} options={{
 								headerLeftContainerStyle: { display: 'none' },
