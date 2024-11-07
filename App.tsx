@@ -16,6 +16,9 @@ import { BackHandler } from 'react-native';
 
 import Inicio from './src/views/Inicio';
 import Login from './src/views/Login';
+import Entregas from './src/views/Entregas';
+import Faltas from './src/views/Faltas';
+import DrawerContent from './src/drawer/DrawerContent';
 
 const Drawer = createDrawerNavigator();
 
@@ -38,7 +41,7 @@ function App(): React.JSX.Element {
 			<GestureHandlerRootView>
 				<NativeBaseProvider>
 					<NavigationContainer>
-						<Drawer.Navigator initialRouteName='Login' screenOptions={{
+						<Drawer.Navigator initialRouteName='Login' drawerContent={DrawerContent} screenOptions={{
 							swipeEnabled: true,
 							swipeEdgeWidth: 100
 						}}>
@@ -48,6 +51,8 @@ function App(): React.JSX.Element {
 								swipeEnabled: false,
 							}} />
 							<Drawer.Screen name='Inicio' component={Inicio} />
+							<Drawer.Screen name='Entregas' component={Entregas} />
+							<Drawer.Screen name='Faltas' component={Faltas} />
 						</Drawer.Navigator>
 					</NavigationContainer>
 				</NativeBaseProvider>
