@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { Box, Text, VStack, Center } from 'native-base';
+import { FlatList, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Box, Text, VStack, Center, HStack } from 'native-base';
 
 const courses = [
 	{ id: '1', title: 'ICloud Native - I TUTORIA (ITUT)', duration: '5 Horas' },
@@ -10,27 +10,45 @@ const courses = [
 	{ id: '5', title: 'AI in the Cloud', duration: '5 Horas' },
 ];
 
-const Inicio = () => {
+const Inicio = ({ navigation }) => {
+
+	const goToAssignments = (id) => {
+		console.log(id);
+		navigation.navigate('Tareas', { id: id });
+	}
+
 	const renderCourse = ({ item }) => (
-		<Box
-			marginTop='4'
-			borderColor="coolGray.200"
-			borderRadius="sm"
-			bg="primary.700"
-			p="4"
-			mb="4"
-			shadow="3"
-			background='purple.600'
-			style={styles.courseBox}>
-			<VStack alignItems="center" space={2}>
-				<Text fontSize="lg" fontWeight="bold" color="white">
-					{item.title}
-				</Text>
-				<Text fontSize="sm" color="white">
-					Duración: {item.duration}
-				</Text>
-			</VStack>
-		</Box >
+		<TouchableOpacity onPress={() => { goToAssignments(item.id) }}>
+			<Box
+				mt='4'
+				mb="4"
+				borderColor="coolGray.200"
+				borderRadius="sm"
+				py="4"
+				pb='0'
+				shadow="3"
+				bg='purple.600'
+				style={styles.courseBox}>
+				<VStack alignItems="center" space={2}>
+					<Text fontSize="lg" fontWeight="bold" color="white">
+						{item.title}
+					</Text>
+					<Text fontSize="sm" color="white">
+						Duración: {item.duration}
+					</Text>
+				</VStack>
+				<HStack
+					mt='2'
+					bg='purple.700'
+					width='100%'
+					px='4'
+					justifyContent='center'>
+					<Text color='white' shadow='2'>
+						Abrir
+					</Text>
+				</HStack>
+			</Box >
+		</TouchableOpacity>
 	);
 
 	return (

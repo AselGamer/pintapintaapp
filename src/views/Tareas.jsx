@@ -1,6 +1,6 @@
 import { Box, View } from "native-base";
 
-const Entregas = () => {
+const Tareas = ({ route, navigation }) => {
 	return (
 		<Box>
 
@@ -8,4 +8,4 @@ const Entregas = () => {
 	);
 }
 
-export default Entregas;
+export default Tareas;
