@@ -1,28 +1,53 @@
 import { Box, Center, Text, VStack, HStack, View } from "native-base";
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 
 const faltas = [
-	{ id: '1', title: 'Falta 1', count: 20 }
+	{ id: '1', title: 'Redes 2024', count: 20 }
 ]
 
 const Faltas = () => {
 	const renderFaltas = ({ item }) => (
-		<Box flex='1' flexDir='column' bg='red.50'>
-			<HStack flex='1' flexDir='row'>
-				<Text fontSize='lg'>{item.title}</Text>
-				<Text fontSize='lg'>{item.count}</Text>
-			</HStack>
-		</Box>
+		<HStack
+			space={4}
+			justifyContent="space-between"
+			px={4}
+			py={3}
+			borderBottomWidth={1}
+			borderColor="coolGray.200"
+		>
+			<Text flex={1} textAlign="center">
+				{item.title}
+			</Text>
+			<Text flex={1} textAlign="center">
+				{item.count}
+			</Text>
+		</HStack>
 	)
 
 	return (
-		<VStack flex={1}>
+		<Box flex={1} safeArea bg="coolGray.100">
+			<HStack
+				space={4}
+				justifyContent="space-between"
+				px={4}
+				py={3}
+				borderBottomWidth={2}
+				borderColor="coolGray.300"
+				bg="coolGray.200"
+			>
+				<Text flex={1} textAlign="center" fontWeight="bold">
+					Asignaturas
+				</Text>
+				<Text flex={1} textAlign="center" fontWeight="bold">
+					Faltas
+				</Text>
+			</HStack>
 			<FlatList
 				data={faltas}
 				renderItem={renderFaltas}
 				keyExtractor={(item) => item.id}
 			/>
-		</VStack>
+		</Box>
 	);
 }
 
