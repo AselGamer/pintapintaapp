@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { VStack, FormControl, Input, Button, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
+import axios from 'axios';
 
 
 const Login = ({ navigation }) => {
@@ -15,6 +16,17 @@ const Login = ({ navigation }) => {
 			navigation.navigate('Inicio');
 		}
 	}, []);
+
+	const login = () => {
+		axios.post('/auth/signin', {
+			'firstname': formData.email,
+			'password': formData.password
+		}).then((res) => {
+			console.log(res.data);
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
 
 	const validate = () => {
 		setErrors(errors => {
@@ -44,7 +56,7 @@ const Login = ({ navigation }) => {
 
 	const submitLogin = () => {
 		// Validar login
-		validate() ? navigation.navigate('Inicio') : '';
+		validate() ? login() : '';
 	}
 
 	return (
