@@ -13,7 +13,6 @@ const courses = [
 const Inicio = ({ navigation }) => {
 
 	const goToAssignments = (id) => {
-		console.log(id);
 		navigation.navigate('Tareas', { id: id });
 	}
 
@@ -21,19 +20,19 @@ const Inicio = ({ navigation }) => {
 		<TouchableOpacity onPress={() => { goToAssignments(item.id) }}>
 			<Box
 				mt='4'
-				mb="4"
-				borderColor="coolGray.200"
-				borderRadius="sm"
-				py="4"
+				mb='4'
+				borderColor='coolGray.200'
+				borderRadius='sm'
+				py='4'
 				pb='0'
-				shadow="3"
+				shadow='3'
 				bg='purple.600'
 				style={styles.courseBox}>
-				<VStack alignItems="center" space={2}>
-					<Text fontSize="lg" fontWeight="bold" color="white">
+				<VStack alignItems='center' space={2}>
+					<Text fontSize='lg' fontWeight='bold' color='white'>
 						{item.title}
 					</Text>
-					<Text fontSize="sm" color="white">
+					<Text fontSize='sm' color='white'>
 						Duración: {item.duration}
 					</Text>
 				</VStack>
@@ -52,7 +51,7 @@ const Inicio = ({ navigation }) => {
 	);
 
 	return (
-		<Center flex={1} bg="gray.100">
+		<Center flex={1} bg='gray.100'>
 			<FlatList
 				data={courses}
 				renderItem={renderCourse}

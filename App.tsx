@@ -19,6 +19,7 @@ import Login from './src/views/Login';
 import Entregas from './src/views/Entregas';
 import Faltas from './src/views/Faltas';
 import Tareas from './src/views/Tareas';
+import DetalleTareas from './src/views/DetalleTareas';
 
 import DrawerContent from './src/drawer/DrawerContent';
 
@@ -45,7 +46,7 @@ function App(): React.JSX.Element {
 					<NavigationContainer>
 						<Drawer.Navigator initialRouteName='Login' drawerContent={DrawerContent} screenOptions={{
 							swipeEnabled: true,
-							swipeEdgeWidth: 100
+							swipeEdgeWidth: 100,
 						}}>
 							<Drawer.Screen name='Login' component={Login} options={{
 								headerLeftContainerStyle: { display: 'none' },
@@ -54,6 +55,10 @@ function App(): React.JSX.Element {
 								headerShown: false
 							}} />
 							<Drawer.Screen name='Tareas' component={Tareas} options={{
+								drawerItemStyle: { display: 'none' },
+							}} />
+							<Drawer.Screen name='DetalleTareas' component={DetalleTareas} options={{
+								headerShown: false,
 								drawerItemStyle: { display: 'none' },
 							}} />
 							<Drawer.Screen name='Inicio' component={Inicio} />

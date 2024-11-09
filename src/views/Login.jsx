@@ -19,18 +19,18 @@ const Login = ({ navigation }) => {
 	const validate = () => {
 		setErrors(errors => {
 			if (formData.email === undefined || formData.email === '') {
-				return {...errors, email: 'El email es obligatorio.'};
+				return { ...errors, email: 'El email es obligatorio.' };
 			} else {
-				const {email, ...rest} = errors;
+				const { email, ...rest } = errors;
 				return rest;
 			}
 		});
 
 		setErrors(errors => {
 			if (formData.password === undefined || formData.password === '') {
-				return {...errors, password: 'La contraseña es obligatoria.'};
+				return { ...errors, password: 'La contraseña es obligatoria.' };
 			} else {
-				const {password, ...rest} = errors;
+				const { password, ...rest } = errors;
 				return rest;
 			}
 		});
