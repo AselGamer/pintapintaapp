@@ -27,6 +27,9 @@ const Drawer = createDrawerNavigator();
 import axios from 'axios'
 
 axios.defaults.baseURL = 'http://10.0.2.2:8080/api/'
+AsyncStorage.getItem('token').then((token) => {
+	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+});
 
 function App(): React.JSX.Element {
 

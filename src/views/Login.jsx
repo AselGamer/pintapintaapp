@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { VStack, FormControl, Input, Button, Text } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 import axios from 'axios';
-
+import { setToken, removeToken } from '../tokenManager';
 
 const Login = ({ navigation }) => {
-
-	const [isLoggedIn, getIsLoggedIn] = useState(false);
 
 	const [formData, setData] = React.useState({});
 	const [errors, setErrors] = React.useState({});
 
 	useEffect(() => {
-		if (isLoggedIn) {
-			navigation.navigate('Inicio');
-		}
+		axios.get('/courses/all')
+			.then(() => {
+				navigation.navigate('Inicio');
+			})
+			.catch(() => {
+				removeToken();
+			});
 	}, []);
 
 	const login = () => {
@@ -22,13 +24,15 @@ const Login = ({ navigation }) => {
 			'firstname': formData.email,
 			'password': formData.password
 		}).then((res) => {
-			console.log(res.data);
-		}).catch((err) => {
-			console.log(err);
+			setToken(res.data.token);
+			navigation.navigate('Inicio');
+		}).catch(() => {
+			setErrors({ ...errors, login: 'La contraseña o el correo son incorrectos, intentelo otra vez.' })
 		});
 	}
 
 	const validate = () => {
+		setErrors({});
 		setErrors(errors => {
 			if (formData.email === undefined || formData.email === '') {
 				return { ...errors, email: 'El email es obligatorio.' };
@@ -87,6 +91,7 @@ const Login = ({ navigation }) => {
 				})} />
 				{'password' in errors && <FormControl.ErrorMessage _text={{ fontSize: 'sm' }}>{errors.password}</FormControl.ErrorMessage>}
 			</FormControl>
+			{errors.login && <Text fontSize='sm' color='red.400'>{errors.login}</Text>}
 			<Button mt='5' colorScheme='blue' onPress={submitLogin} >
 				<Text fontSize='md' color='white'>Iniciar Sesion</Text>
 			</Button>
