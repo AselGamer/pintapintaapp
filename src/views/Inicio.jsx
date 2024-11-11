@@ -1,16 +1,19 @@
-import React from 'react';
-import { FlatList, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Box, Text, VStack, Center, HStack } from 'native-base';
-
-const courses = [
-	{ id: '1', title: 'ICloud Native - I TUTORIA (ITUT)', duration: '5 Horas' },
-	{ id: '2', title: 'Cloud Computing Fundamentals', duration: '5 Horas' },
-	{ id: '3', title: 'Advanced Cloud Infrastructure', duration: '5 Horas' },
-	{ id: '4', title: 'Serverless Applications', duration: '5 Horas' },
-	{ id: '5', title: 'AI in the Cloud', duration: '5 Horas' },
-];
+import axios from 'axios';
 
 const Inicio = ({ navigation }) => {
+
+	const [courses, setCourses] = useState({});
+
+	useEffect(() => {
+		axios.get('courses/all/enrolled').then((resp) => {
+			setCourses(resp.data);
+		}).catch((err) => {
+			console.log(err);
+		});
+	}, []);
 
 	const goToAssignments = (id) => {
 		navigation.navigate('Tareas', { id: id });
@@ -30,7 +33,7 @@ const Inicio = ({ navigation }) => {
 				style={styles.courseBox}>
 				<VStack alignItems='center' space={2}>
 					<Text fontSize='lg' fontWeight='bold' color='white'>
-						{item.title}
+						{item.name}
 					</Text>
 					<Text fontSize='sm' color='white'>
 						Duración: {item.duration}

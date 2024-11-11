@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
 
 	const login = () => {
 		axios.post('/auth/signin', {
-			'firstname': formData.email,
+			'email': formData.email,
 			'password': formData.password
 		}).then((res) => {
 			setToken(res.data.token);
