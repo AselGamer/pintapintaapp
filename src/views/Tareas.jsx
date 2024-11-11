@@ -1,31 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, TouchableHighlight } from 'react-native';
 import { Box, Text, VStack, HStack, Heading } from 'native-base';
-
-const tareas = [
-	{
-		id: 1,
-		name: 'Assignment 1',
-		description: 'Description of Assignment 1',
-		start_date: '2023-11-01',
-		end_date: '2023-11-10'
-	},
-	{
-		id: 2,
-		name: 'Assignment 2',
-		description: 'Description of Assignment 2',
-		start_date: '2023-12-01',
-		end_date: '2023-12-15'
-	},
-	// Add more assignments as needed
-];
+import axios from 'axios';
 
 const Tareas = ({ route, navigation }) => {
 
 	const { id } = route.params;
 
+	const [tareas, setTareas] = useState({});
+
 	useEffect(() => {
-		// Sacar las tareas
+		axios.get('/assignments/course/' + id)
+			.then((resp) => {
+				setTareas(resp.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			})
 	}, [id]);
 
 	const goToDetails = (id) => {

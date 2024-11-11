@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text, Button, VStack, HStack, Heading, ScrollView } from 'native-base';
-
-const assignment = {
-	id: 2,
-	name: 'Assignment 2',
-	description: 'Description of Assignment 2',
-	start_date: '2023-12-01',
-	end_date: '2023-12-15',
-	submitted: false,
-	grade: 10,
-	send_date: '2023-12-15',
-	graded_date: '2023-12-15',
-};
+import axios from 'axios';
 
 const DetalleTareas = ({ route, navigation }) => {
 
+	const [assignment, setAssignment] = useState({});
+
 	const { id } = route.params;
+
+	const handleMarkAsSubmitted = () => {
+	}
+
+	useEffect(() => {
+		axios.get('/assignments/user/submissions/'+id)
+			.then((resp) => {
+				setAssignment(resp.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [id]);
+
+	console.log(assignment.submission);
 
 	return (
 		<ScrollView flex={1} padding='4' bg='white'>
@@ -53,7 +59,7 @@ const DetalleTareas = ({ route, navigation }) => {
 					mt='6'
 					colorScheme='teal'
 					// onPress={handleMarkAsSubmitted}
-					isDisabled={assignment.submitted}>
+					isDisabled={true}>
 					{assignment.submitted ? 'Entregado' : 'Marcar como entregado'}
 				</Button>
 				<Button
