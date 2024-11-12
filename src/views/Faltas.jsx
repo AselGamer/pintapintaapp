@@ -1,11 +1,20 @@
+import React, { useEffect, useState } from 'react';
 import { Box, Center, Text, VStack, HStack, View } from "native-base";
 import { FlatList, StyleSheet } from "react-native";
+import axios from 'axios';
 
-const faltas = [
-	{ id: '1', title: 'Redes 2024', count: 20 }
-]
+const Faltas = ({ route }) => {
 
-const Faltas = () => {
+	const [faltas, setFaltas] = useState({});
+
+	useEffect(() => {
+		axios.get('/enrollments/absences/mine')
+			.then((resp) => {
+				setFaltas(resp.data);
+			})
+			.catch();
+	}, []);
+
 	const renderFaltas = ({ item }) => (
 		<HStack
 			space={4}
@@ -16,10 +25,7 @@ const Faltas = () => {
 			borderColor="coolGray.200"
 		>
 			<Text flex={1} textAlign="center">
-				{item.title}
-			</Text>
-			<Text flex={1} textAlign="center">
-				{item.count}
+				{item.date}
 			</Text>
 		</HStack>
 	)
@@ -36,10 +42,7 @@ const Faltas = () => {
 				bg="coolGray.200"
 			>
 				<Text flex={1} textAlign="center" fontWeight="bold">
-					Asignaturas
-				</Text>
-				<Text flex={1} textAlign="center" fontWeight="bold">
-					Faltas
+					Fecha
 				</Text>
 			</HStack>
 			<FlatList

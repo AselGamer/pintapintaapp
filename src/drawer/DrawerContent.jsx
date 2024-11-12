@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
 	DrawerContentScrollView,
 	DrawerItemList,
@@ -5,13 +6,26 @@ import {
 } from '@react-navigation/drawer';
 import { View, Text, Image } from 'native-base';
 import { SafeAreaView, StyleSheet, BackHandler } from 'react-native';
+import axios from 'axios';
 
 
 const DrawerContent = (props) => {
 
+	const [user, setUser] = useState({});
+
 	const logoutButton = () => {
 		props.navigation.navigate('Login');
 	}
+
+	useEffect(() => {
+		axios.get('/users/profile')
+			.then((resp) => {
+				setUser(resp.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			})
+	}, []);
 
 	return (
 		<DrawerContentScrollView {...props} contentContainerStyle={styles.scrollView} >
@@ -26,12 +40,12 @@ const DrawerContent = (props) => {
 						marginBottom: 10,
 					}}>
 					<View>
-						<Text>John Doe</Text>
-						<Text>example@email.com</Text>
+						<Text>{user.firstname}</Text>
+						<Text>{user.email}</Text>
 					</View>
 					<Image
 						source={{
-							uri: 'https://images.unsplash.com/photo-1624243225303-261cc3cd2fbc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+							uri: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Fdefault-user-icon%2Fdefault-user-icon-13.jpg&f=1&nofb=1&ipt=92012585abee88f8a1b9030631ab688a3a66c93cd5118307e53972415b2f228b&ipo=images',
 						}}
 						alt='Foto perfil'
 						style={{ width: 60, height: 60, borderRadius: 30 }}

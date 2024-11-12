@@ -16,8 +16,8 @@ const Tareas = ({ route, navigation }) => {
 			})
 			.catch((err) => {
 				console.log(err);
-			})
-	}, [id]);
+			});
+	}, []);
 
 	const goToDetails = (id) => {
 		navigation.navigate('DetalleTareas', { id: id });
